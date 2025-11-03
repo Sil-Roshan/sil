@@ -190,7 +190,7 @@ export const translations = {
     
     // Logout
     logout: 'تسجيل الخروج',
-    version: 'سِل الإصدار 1.0.0',
+    version: 'صِل الإصدار 1.0.0',
   },
   en: {
     // Common
