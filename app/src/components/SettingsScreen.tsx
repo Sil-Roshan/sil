@@ -97,7 +97,7 @@ export function SettingsScreen() {
   const isOwner = userProfile?.role === 'owner';
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 pb-4">
+    <div className="min-h-screen bg-[#e8e7dc] dark:bg-gray-950 pb-4">
       {/* Header */}
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-4 py-4">
         <h1 className="text-[#24582a]">{t.settings}</h1>

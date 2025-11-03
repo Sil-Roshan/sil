@@ -82,7 +82,7 @@ export function RealEstateScreen() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen bg-[#e8e7dc] dark:bg-gray-950">
       {/* Header */}
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-4 py-4 sticky top-0 z-10">
         <h1 className="text-[#24582a] mb-3">{t.realEstate}</h1>
