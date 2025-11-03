@@ -1,0 +1,11 @@
+Theme Color Replacements:
+bg-blue-600 → bg-[#24582a]
+bg-blue-700 → bg-[#1a3a1f]
+bg-blue-500 → bg-[#24582a]
+bg-blue-100 → bg-[#e8e7dc]
+bg-blue-50 → bg-[#f4f3e8]
+text-blue-600 → text-[#24582a]
+text-blue-700 → text-[#24582a]
+text-blue-400 → text-[#5a7a5f]
+hover:bg-blue-700 → hover:bg-[#1a3a1f]
+hover:bg-blue-600 → hover:bg-[#1a3a1f]
