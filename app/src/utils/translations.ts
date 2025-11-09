@@ -52,6 +52,16 @@ export const translations = {
     parking: 'المواقف',
     realEstate: 'العقارات',
     settings: 'الإعدادات',
+    neighbors: 'الجيران',
+    services: 'الخدمات',
+    realEstate: 'العقارات',
+    settings: 'الإعدادات',
+    communitySubtitle: 'اكتشف أحدث المنشورات في مجتمعك.',
+    neighborsSubtitle: 'نسّق مع الجيران في نفس المبنى.',
+    servicesSubtitle: 'احجز الخدمات الموثوقة لمنزلك ومجمعك.',
+    realEstateSubtitle: 'استكشف العقارات والفرص القريبة.',
+    settingsSubtitle: 'اضبط تفضيلاتك وحسابك.',
+    topBarTagline: 'معًا نضيء',
     
     // Posts & Feed
     newPost: 'منشور جديد',
@@ -245,6 +255,16 @@ export const translations = {
     parking: 'Parking',
     realEstate: 'Real Estate',
     settings: 'Settings',
+    neighbors: 'Neighbors',
+    services: 'Services',
+    realEstate: 'Real Estate',
+    settings: 'Settings',
+    communitySubtitle: 'Discover the latest posts in your community.',
+    neighborsSubtitle: 'Coordinate with people who share your building.',
+    servicesSubtitle: 'Book trusted services for your home and community.',
+    realEstateSubtitle: 'Explore nearby properties and opportunities.',
+    settingsSubtitle: 'Fine-tune your preferences and account.',
+    topBarTagline: 'Together we shine',
     
     // Posts & Feed
     newPost: 'New Post',

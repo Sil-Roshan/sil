@@ -1,23 +1,25 @@
 import { useState, useEffect } from 'react';
-import { Home, Wrench, Car, Building2, Settings } from 'lucide-react';
+import { Home, Wrench, Building2, Settings, Users } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { AppProvider, useApp } from './contexts/AppContext';
 import { SplashScreen } from './components/SplashScreen';
 import { AuthScreen } from './components/AuthScreen';
 import { CommunitySelection } from './components/CommunitySelection';
-import { TopBar } from './components/TopBar';
 import { CommunityFeed } from './components/CommunityFeed';
 import { ServicesScreen } from './components/ServicesScreen';
-import { ParkingAlerts } from './components/ParkingAlerts';
+import { NeighborsScreen } from './components/NeighborsScreen';
 import { RealEstateScreen } from './components/RealEstateScreen';
 import { SettingsScreen } from './components/SettingsScreen';
 import { Toaster } from './components/ui/sonner';
 import { translations } from './utils/translations';
 
+type TabKey = 'community' | 'neighbors' | 'services' | 'realestate' | 'settings';
+
 function AppContent() {
   const [showSplash, setShowSplash] = useState(true);
   const [showAuth, setShowAuth] = useState(false);
   const [showCommunitySelection, setShowCommunitySelection] = useState(false);
-  const [activeTab, setActiveTab] = useState('community');
+  const [activeTab, setActiveTab] = useState<TabKey>('community');
 
   const { isAuthenticated, isGuest, community, loading, language } = useApp();
   const t = translations[language];
@@ -64,25 +66,29 @@ function AppContent() {
     switch (activeTab) {
       case 'community':
         return <CommunityFeed />;
-      case 'services':
-        return <ServicesScreen />;
-      case 'parking':
-        return <ParkingAlerts />;
       case 'realestate':
         return <RealEstateScreen />;
       case 'settings':
         return <SettingsScreen />;
+      case 'neighbors':
+        return <NeighborsScreen />;
+      case 'services':
+        return <ServicesScreen />;
       default:
         return <CommunityFeed />;
     }
   };
 
+  const navTabs: Array<{ key: TabKey; icon: LucideIcon; label: string; main?: boolean }> = [
+    { key: 'services', icon: Wrench, label: t.services },
+    { key: 'neighbors', icon: Users, label: t.neighbors },
+    { key: 'community', icon: Home, label: t.community, main: true },
+    { key: 'realestate', icon: Building2, label: t.realEstate },
+    { key: 'settings', icon: Settings, label: t.settings },
+  ];
+
   return (
     <div className="flex flex-col h-screen bg-gray-50 dark:bg-gray-950 max-w-md mx-auto" dir="rtl">
-      {/* Top Bar */}
-      <TopBar />
-
-      {/* Content Area */}
       <div className="flex-1 overflow-auto">
         {renderContent()}
       </div>
@@ -90,55 +96,28 @@ function AppContent() {
       {/* Bottom Navigation */}
       <nav className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 px-4 py-2 safe-area-inset-bottom">
         <div className="flex items-center justify-around">
-          <button
-            onClick={() => setActiveTab('community')}
-            className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-colors ${
-              activeTab === 'community' ? 'text-[#24582a]' : 'text-gray-600 dark:text-gray-400'
-            }`}
-          >
-            <Home className="w-6 h-6" />
-            <span className="text-xs">{t.community}</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('services')}
-            className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-colors ${
-              activeTab === 'services' ? 'text-[#24582a]' : 'text-gray-600 dark:text-gray-400'
-            }`}
-          >
-            <Wrench className="w-6 h-6" />
-            <span className="text-xs">{t.services}</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('parking')}
-            className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-colors ${
-              activeTab === 'parking' ? 'text-[#24582a]' : 'text-gray-600 dark:text-gray-400'
-            }`}
-          >
-            <Car className="w-6 h-6" />
-            <span className="text-xs">{t.parking}</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('realestate')}
-            className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-colors ${
-              activeTab === 'realestate' ? 'text-[#24582a]' : 'text-gray-600 dark:text-gray-400'
-            }`}
-          >
-            <Building2 className="w-6 h-6" />
-            <span className="text-xs">{t.realEstate}</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('settings')}
-            className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-colors ${
-              activeTab === 'settings' ? 'text-[#24582a]' : 'text-gray-600 dark:text-gray-400'
-            }`}
-          >
-            <Settings className="w-6 h-6" />
-            <span className="text-xs">{t.settings}</span>
-          </button>
+          {navTabs.map(({ key, icon: Icon, label, main }) => {
+            const isActive = activeTab === key;
+            const baseClasses = 'flex flex-col items-center gap-1 rounded-lg transition-colors';
+            const sizeClasses = main ? 'px-4 py-3 rounded-full' : 'px-3 py-2';
+            const stateClasses = main
+              ? isActive
+                ? 'bg-[#24582a] text-white shadow-lg'
+                : 'bg-[#24582a]/10 text-[#24582a]'
+              : isActive
+                ? 'text-[#24582a]'
+                : 'text-gray-600 dark:text-gray-400';
+            return (
+              <button
+                key={key}
+                onClick={() => setActiveTab(key)}
+                className={`${baseClasses} ${sizeClasses} ${stateClasses}`}
+              >
+                <Icon className="w-6 h-6" />
+                <span className="text-xs">{label}</span>
+              </button>
+            );
+          })}
         </div>
       </nav>
     </div>
